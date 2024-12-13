@@ -1,0 +1,2 @@
+# nodejs-ecommerce-api
+ This is a simple Node.js server designed for managing e-commerce data. It allows for the addition and removal of product information, with all data being stored in a JSON file. The server aims to provide a basic and easy-to-use API for handling e-commerce operations, such as product management and inventory tracking. It is ideal for simple projects or as a backend for a small online store.

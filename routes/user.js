@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-const usersFilePath = path.join(__dirname, '../data/users.json');
+const usersFilePath = path.join(__dirname, '../db/users.json');
 
 const getUsers = () => {
     const data = fs.readFileSync(usersFilePath, 'utf-8');

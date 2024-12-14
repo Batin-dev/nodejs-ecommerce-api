@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <h1>Product Management</h1>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="productList">
+          <!-- Products! -->
+        </tbody>
+      </table>
+    </div>
+    <div class="action-buttons">
+      <button class="action-button" id="addProduct">Add product</button>
+      <button class="action-button" id="updateProduct">Update Product</button>
+      <button class="action-button" id="deleteProduct">Delete Product</button>
+      <button class="action-button" id="refreshProducts">Refresh</button>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-header" id="modalTitle">Modal Title</div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn cancel" id="cancelButton">Cancel</button>
+        <button class="btn save" id="saveButton">Save</button>
+      </div>
+    </div>
+
+    <div id="toast" class="toast">Product Added!</div>
+
+    <footer>
+      <p>
+        Made by
+        <a
+          href="https://github.com/Batin-dev"
+          target="_blank"
+          class="github-link"
+        >
+          batin.cpp
+        </a>
+      </p>
+    </footer>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

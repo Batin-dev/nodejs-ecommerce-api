@@ -3,7 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const router = express.Router();
 
-const filePath = path.join(__dirname, "../data/products.json");
+
+const filePath = path.join(__dirname, "../db/products.json");
 
 const readProductsFromFile = () => {
   const data = fs.readFileSync(filePath);
@@ -19,9 +20,11 @@ router.get("/", (req, res) => {
   try {
     const products = readProductsFromFile();
     res.status(200).json(products);
+    
   } catch (err) {
     res.status(500).json({ error: "Failed to retrieve products" });
     console.error(err);
+
   }
 });
 
@@ -69,6 +72,48 @@ router.post("/add", (req, res) => {
     console.error(err);
   }
 });
+
+router.post('/update', (req, res) => {
+
+  if (!req.body.id) return res.status(400).json({ error: "id must be filled" });
+
+  let changes = req.body;
+
+  let products = readProductsFromFile();
+  const productIndex = products.findIndex((product) => product.id === changes.id);
+
+  if (productIndex === -1) {
+    return res.status(404).json({ error: `Product with ID ${changes.id} not found` });
+  }
+
+  let updatedProduct = products[productIndex];
+
+  if (changes.name) updatedProduct.name = changes.name;
+  if (changes.description) updatedProduct.description = changes.description;
+  if (changes.price) {
+    const price = changes.price;
+    if (isNaN(price)) {
+      return res.status(400).json({ error: "price must be numeric" });
+    }
+    updatedProduct.price = price;
+  }
+  products[productIndex] = updatedProduct;
+
+  try {
+
+    writeProductsToFile(products);
+    res.status(200).json({ success: true, product: updatedProduct });
+    console.log("Updated product:", updatedProduct);
+
+  } catch (err) {
+
+    res.status(500).json({ error: "Internal server error while updating product" });
+    console.error(err);
+
+  }
+});
+
+
 
 router.post("/delete", (req, res) => {
   if (!req.body.id) {

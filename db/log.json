@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2024-12-15T00:57:25.973Z",
+    "procType": "LOGIN",
+    "location": "/user/login",
+    "mail": "admin@example.com"
+  },
+  {
+    "timestamp": "2024-12-15T00:57:30.891Z",
+    "procType": "LOGIN",
+    "location": "/user/login",
+    "mail": "admin@example.com"
+  },
+  {
+    "timestamp": "2024-12-15T00:57:45.739Z",
+    "procType": "ADD",
+    "location": "/product/add",
+    "mail": null
+  },
+  {
+    "timestamp": "2024-12-15T00:57:58.944Z",
+    "procType": "DELETE",
+    "location": "/product/delete",
+    "mail": null
+  }
+]

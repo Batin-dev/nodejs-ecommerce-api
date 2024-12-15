@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
+const logger = require("../lib/logger");
 
 
 const filePath = path.join(__dirname, "../db/products.json");
@@ -66,7 +67,10 @@ router.post("/add", (req, res) => {
     products.push(newProduct);
     writeProductsToFile(products);
     res.status(201).json({ success: true, product: newProduct });
+
     console.log("Added product:", newProduct);
+    logger("ADD","/product/add", null)
+    
   } catch (err) {
     res.status(500).json({ error: "Internal server error while adding product" });
     console.error(err);
@@ -103,7 +107,9 @@ router.post('/update', (req, res) => {
 
     writeProductsToFile(products);
     res.status(200).json({ success: true, product: updatedProduct });
+
     console.log("Updated product:", updatedProduct);
+    logger("UPDATE","/product/update", null)
 
   } catch (err) {
 
@@ -139,6 +145,8 @@ router.post("/delete", (req, res) => {
   writeProductsToFile(products);
 
   res.status(200).json({ success: true });
+
+  logger("DELETE","/product/delete", null)
 });
 
 module.exports = router;

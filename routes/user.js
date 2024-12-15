@@ -2,16 +2,13 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const logger = require('../lib/logger');
 
 const usersFilePath = path.join(__dirname, '../db/users.json');
 
 const getUsers = () => {
     const data = fs.readFileSync(usersFilePath, 'utf-8');
     return JSON.parse(data);
-};
-
-const writeUsers = (users) => {
-    fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
 };
 
 router.get('/', (req, res) => {
@@ -27,7 +24,11 @@ router.post('/login', (req,res)=> {
     const users = getUsers();
     const user = users.find(user => user.email === email && user.password === password);
 
-    if(user)  {res.status(200).json({ succes : true}); console.log(`${email} succesfully logined`)}
+    if(user)  {
+        res.status(200).json({ succes : true}); console.log(`${email} succesfully logined`)
+        logger("LOGIN","/user/login", email)
+    }
+
     else { res.status(401).json({ succes : false, error : "invalid email or password"})};
 
 });
